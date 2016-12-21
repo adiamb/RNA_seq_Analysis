@@ -25,11 +25,20 @@ tot_seq = tot_seq[-1,]
 tot_seq = as.data.frame(tot_seq)
 rownames(tot_seq) = tot_seq$gene_id
 tot_seq$gene_id = NULL
+require(ggplot2)
+ggplot(tot_seq, aes(log(cd4_pandemrix.tpm), log(cd4_control.tpm), label = rownames(tot_seq)))+geom_point(alpha = 1/5)+xlim(-5, 10)+ylim(-5, 10)+geom_text(angle=60, check_overlap = T, hjust = -0.2, nudge_x = 0.1)+theme(axis.text.x = element_text(size = 15), axis.text.y = element_text(size =15), axis.title.x = element_text(size = 18, face = "bold"), axis.title.y = element_text(size = 18, face = "bold"))
+ggplot(tot_seq, aes(log(cd4_pandemrix.tpm), log(cd4_control.tpm), label = rownames(tot_seq)))+geom_point(alpha = 1/5)+xlim(-10, 10)+ylim(-10, 10)+geom_text(angle=60, check_overlap = T, hjust = -0.2, nudge_x = 0.1)
+
+
+
+
+
+
 require(Biobase)
 require(limma)
 object<-new("ExpressionSet", exprs=as.matrix(tot_seq)) #this is the x from above in the SAMR
 object #see if the dimesnions are right !
-ds = as.factor(rep(1, 2))
+ds = as.factor(c(1, 2, 1, 2, 1, 2, 1, 2, 1, 2))
 design = model.matrix(~ds) 
-fit = eBayes(lmFit(object))
-we=topTable(fit, coef="Ignorm8$Diagnosis", adjust="BH", number = 15)
+fit = eBayes(lmFit(object, design))
+we=topTable(fit, coef="ds2", adjust="BH", number = 15)
