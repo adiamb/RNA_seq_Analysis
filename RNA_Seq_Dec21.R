@@ -17,4 +17,19 @@ rna_seq2 = select(rna_seq, gene_id, DeltaCD4, DeltaCD8, DeltaCD19, DeltaCD14, De
 apply(rna_seq2, 2, FUN = function(x)(sum(is.na(x))))
 ##remove row1 _ missing value
 rna_seq2 = rna_seq2[-1,]     
-rna_seq2 = arrange(rna_seq2, desc(DeltaCD4, DeltaCD8))
+rna_seq2 = arrange(rna_seq2, desc(DeltaCD8))
+rna_seq2
+library(limma)
+tot_seq = select(rna_seq, gene_id, cd4_pandemrix.tpm, cd4_control.tpm, cd8_pandemrix.tpm, cd8_control.tpm, cd14_pandemrix.tpm, cd14_control.tpm, cd19_pandemrix.tpm, cd19_control.tpm, nk_pandemrix.tpm, nk_control.tpm)
+tot_seq = tot_seq[-1,]
+tot_seq = as.data.frame(tot_seq)
+rownames(tot_seq) = tot_seq$gene_id
+tot_seq$gene_id = NULL
+require(Biobase)
+require(limma)
+object<-new("ExpressionSet", exprs=as.matrix(tot_seq)) #this is the x from above in the SAMR
+object #see if the dimesnions are right !
+ds = as.factor(rep(1, 2))
+design = model.matrix(~ds) 
+fit = eBayes(lmFit(object))
+we=topTable(fit, coef="Ignorm8$Diagnosis", adjust="BH", number = 15)
