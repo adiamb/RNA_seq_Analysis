@@ -41,6 +41,7 @@ plot2=ggplot(totlog, aes(cd8_pandemrix.tpm, cd8_control.tpm, label = totlog$gene
 plot3=ggplot(totlog, aes(cd19_pandemrix.tpm, cd19_control.tpm, label = totlog$gene_id))+geom_point(alpha = 1/5)+geom_text(angle=60, check_overlap = T, hjust = -0.2, nudge_x = 0.1)+theme(axis.text.x = element_text(size = 15), axis.text.y = element_text(size =15), axis.title.x = element_text(size = 18, face = "bold"), axis.title.y = element_text(size = 18, face = "bold"))
 plot4=ggplot(totlog, aes(cd14_pandemrix.tpm, cd14_control.tpm, label = totlog$gene_id))+geom_point(alpha = 1/5)+geom_text(angle=60, check_overlap = T, hjust = -0.2, nudge_x = 0.1)+theme(axis.text.x = element_text(size = 15), axis.text.y = element_text(size =15), axis.title.x = element_text(size = 18, face = "bold"), axis.title.y = element_text(size = 18, face = "bold"))
 plot5=ggplot(totlog, aes(nk_pandemrix.tpm, nk_control.tpm, label = totlog$gene_id))+geom_point(alpha = 1/5)+geom_text(angle=60, check_overlap = T, hjust = -0.2, nudge_x = 0.1)+theme(axis.text.x = element_text(size = 15), axis.text.y = element_text(size =15), axis.title.x = element_text(size = 18, face = "bold"), axis.title.y = element_text(size = 18, face = "bold"))
-
-
-
+##heatmaps for top 50 upreg and 50 downreg genes
+setDT(totlog)
+rnaseq_melt=melt(totlog, id.vars = "gene_id")
+write_csv(rna_seq1, file ='~/Documents/RNA_Seq/')
