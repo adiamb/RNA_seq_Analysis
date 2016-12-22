@@ -44,4 +44,4 @@ plot5=ggplot(totlog, aes(nk_pandemrix.tpm, nk_control.tpm, label = totlog$gene_i
 ##heatmaps for top 50 upreg and 50 downreg genes
 setDT(totlog)
 rnaseq_melt=melt(totlog, id.vars = "gene_id")
-write_csv(rna_seq1, file ='~/Documents/RNA_Seq/')
+write_csv(rna_seq, path ='~/Documents/RNA_Seq/RNA_Seq_deltas_included_Dec21.csv')
