@@ -35,22 +35,12 @@ for (i in colnames(totlog[1:10])){
   totlog[i][totlog[i]== -Inf] = totlog[i][totlog[i]!= -Inf] %>% min()
 }
 require(ggplot2)
-ggplot(totlog, aes(cd4_pandemrix.tpm, cd4_control.tpm, label = totlog$gene_id))+geom_point(alpha = 1/5)+geom_text(angle=60, check_overlap = T, hjust = -0.2, nudge_x = 0.1)+theme(axis.text.x = element_text(size = 15), axis.text.y = element_text(size =15), axis.title.x = element_text(size = 18, face = "bold"), axis.title.y = element_text(size = 18, face = "bold"))
-ggplot(totlog, aes(cd8_pandemrix.tpm, cd8_control.tpm, label = totlog$gene_id))+geom_point(alpha = 1/5)+geom_text(angle=60, check_overlap = T, hjust = -0.2, nudge_x = 0.1)+theme(axis.text.x = element_text(size = 15), axis.text.y = element_text(size =15), axis.title.x = element_text(size = 18, face = "bold"), axis.title.y = element_text(size = 18, face = "bold"))
-ggplot(totlog, aes(cd19_pandemrix.tpm, cd19_control.tpm, label = totlog$gene_id))+geom_point(alpha = 1/5)+geom_text(angle=60, check_overlap = T, hjust = -0.2, nudge_x = 0.1)+theme(axis.text.x = element_text(size = 15), axis.text.y = element_text(size =15), axis.title.x = element_text(size = 18, face = "bold"), axis.title.y = element_text(size = 18, face = "bold"))
-ggplot(totlog, aes(cd14_pandemrix.tpm, cd14_control.tpm, label = totlog$gene_id))+geom_point(alpha = 1/5)+geom_text(angle=60, check_overlap = T, hjust = -0.2, nudge_x = 0.1)+theme(axis.text.x = element_text(size = 15), axis.text.y = element_text(size =15), axis.title.x = element_text(size = 18, face = "bold"), axis.title.y = element_text(size = 18, face = "bold"))
-ggplot(totlog, aes(nk_pandemrix.tpm, nk_control.tpm, label = totlog$gene_id))+geom_point(alpha = 1/5)+geom_text(angle=60, check_overlap = T, hjust = -0.2, nudge_x = 0.1)+theme(axis.text.x = element_text(size = 15), axis.text.y = element_text(size =15), axis.title.x = element_text(size = 18, face = "bold"), axis.title.y = element_text(size = 18, face = "bold"))
-ggplot(totlog, aes(cd4_pandemrix.tpm, cd8_pandemrix.tpm, label = totlog$gene_id))+geom_point(alpha = 1/5)+geom_text(angle=60, check_overlap = T, hjust = -0.2, nudge_x = 0.1)+theme(axis.text.x = element_text(size = 15), axis.text.y = element_text(size =15), axis.title.x = element_text(size = 18, face = "bold"), axis.title.y = element_text(size = 18, face = "bold"))
-ggplot(totlog, aes(cd14_pandemrix.tpm, cd4_pandemrix.tpm, label = totlog$gene_id))+geom_point(alpha = 1/5)+geom_text(angle=60, check_overlap = T, hjust = -0.2, nudge_x = 0.1)+theme(axis.text.x = element_text(size = 15), axis.text.y = element_text(size =15), axis.title.x = element_text(size = 18, face = "bold"), axis.title.y = element_text(size = 18, face = "bold"))
+plot1=ggplot(totlog, aes(cd4_pandemrix.tpm, cd4_control.tpm, label = totlog$gene_id))+geom_point(alpha = 1/5)+geom_text(angle=60, check_overlap = T, hjust = -0.2, nudge_x = 0.1)+theme(axis.text.x = element_text(size = 15), axis.text.y = element_text(size =15), axis.title.x = element_text(size = 18, face = "bold"), axis.title.y = element_text(size = 18, face = "bold"))
+ggsave('~/Documents/RNA_Seq/RNA_seq_Analysis_Dec21/plot5.pdf', plot = plot5, width = 13.6, height = 8, dpi = 800, units = "in")
+plot2=ggplot(totlog, aes(cd8_pandemrix.tpm, cd8_control.tpm, label = totlog$gene_id))+geom_point(alpha = 1/5)+geom_text(angle=60, check_overlap = T, hjust = -0.2, nudge_x = 0.1)+theme(axis.text.x = element_text(size = 15), axis.text.y = element_text(size =15), axis.title.x = element_text(size = 18, face = "bold"), axis.title.y = element_text(size = 18, face = "bold"))
+plot3=ggplot(totlog, aes(cd19_pandemrix.tpm, cd19_control.tpm, label = totlog$gene_id))+geom_point(alpha = 1/5)+geom_text(angle=60, check_overlap = T, hjust = -0.2, nudge_x = 0.1)+theme(axis.text.x = element_text(size = 15), axis.text.y = element_text(size =15), axis.title.x = element_text(size = 18, face = "bold"), axis.title.y = element_text(size = 18, face = "bold"))
+plot4=ggplot(totlog, aes(cd14_pandemrix.tpm, cd14_control.tpm, label = totlog$gene_id))+geom_point(alpha = 1/5)+geom_text(angle=60, check_overlap = T, hjust = -0.2, nudge_x = 0.1)+theme(axis.text.x = element_text(size = 15), axis.text.y = element_text(size =15), axis.title.x = element_text(size = 18, face = "bold"), axis.title.y = element_text(size = 18, face = "bold"))
+plot5=ggplot(totlog, aes(nk_pandemrix.tpm, nk_control.tpm, label = totlog$gene_id))+geom_point(alpha = 1/5)+geom_text(angle=60, check_overlap = T, hjust = -0.2, nudge_x = 0.1)+theme(axis.text.x = element_text(size = 15), axis.text.y = element_text(size =15), axis.title.x = element_text(size = 18, face = "bold"), axis.title.y = element_text(size = 18, face = "bold"))
 
 
 
-
-require(Biobase)
-require(limma)
-object<-new("ExpressionSet", exprs=as.matrix(tot_seq)) #this is the x from above in the SAMR
-object #see if the dimesnions are right !
-ds = as.factor(c(1, 2, 1, 2, 1, 2, 1, 2, 1, 2))
-design = model.matrix(~ds) 
-fit = eBayes(lmFit(object, design))
-we=topTable(fit, coef="ds2", adjust="BH", number = 15)
